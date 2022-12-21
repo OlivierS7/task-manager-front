@@ -33,4 +33,9 @@ html, body {
     align-items: center;
     width: 100%;
     height: 100%;
-  }
+}
+
+.dynamic-modal-body {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}

@@ -59,7 +59,7 @@ import {
               (click)="onCloseClick()"
             ></button>
           </header>
-          <section class="modal-card-body">
+          <section class="modal-card-body dynamic-modal-body">
             <ng-template appDynamicDialogContent></ng-template>
           </section>
         </div>

@@ -2,10 +2,10 @@
     <div class="modal-box">
         <div class="field is-grouped">
             <p class="control is-expanded">
-                <input class="input has-background-light is-medium" type="text" placeholder="List Name">
+                <input #listTitleInput class="input has-background-light is-medium" type="text" placeholder="Enter list name...">
             </p>
             <p class="control">
-                <a class="button is-primary is-medium has-text-white" (click)="onCreate('test')">Create</a>
+                <a class="button is-primary is-medium has-text-white" (click)="onCreate(listTitleInput.value)">Create</a>
             </p>
         </div>
     </div>
