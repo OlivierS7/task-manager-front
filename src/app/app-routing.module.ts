@@ -4,7 +4,8 @@ import { TaskViewComponent } from './pages/task-view/task-view.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'lists', pathMatch: 'full'},
-  {path: '/lists.:listId', component: TaskViewComponent}
+  {path: 'lists', component: TaskViewComponent},
+  {path: 'lists/:listId', component: TaskViewComponent}
 ];
 
 @NgModule({
