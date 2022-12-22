@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { WebRequestService } from '../WebService/web-request.service';
 
 @Injectable({
@@ -6,17 +7,38 @@ import { WebRequestService } from '../WebService/web-request.service';
 })
 export class TaskService {
 
-  constructor(private webRequestService: WebRequestService) { }
+  private getLists$ = new Subject()
+  private getTasks$ = new Subject()
 
-  createList(title: string) {
-    return this.webRequestService.post('lists', {title})
+  constructor(private webRequestService: WebRequestService) {}
+
+  async createList(title: string) {
+    let result = await this.webRequestService.post('lists', {title}).toPromise()
+    this.webRequestService.get('lists').subscribe((lists) => {
+      this.getLists$.next(lists)
+    })
+    return result
   }
 
   getLists() {
-    return this.webRequestService.get('lists')
+    this.webRequestService.get('lists').subscribe((lists) => {
+      this.getLists$.next(lists)
+    })
+    return this.getLists$
   }
 
   getTasks(listId: string) {
-    return this.webRequestService.get(`lists/${listId}/tasks`)
+    this.webRequestService.get(`lists/${listId}/tasks`).subscribe((tasks) => {
+      this.getTasks$.next(tasks)
+    })
+    return this.getTasks$
+  }
+
+  async createTask(title: string, listId: string) {
+    let result = await this.webRequestService.post(`lists/${listId}/tasks`, {title}).toPromise()
+    this.webRequestService.get(`lists/${listId}/tasks`).subscribe((tasks) => {
+      this.getTasks$.next(tasks)
+    })
+    return result
   }
 }

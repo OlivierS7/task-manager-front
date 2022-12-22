@@ -1,0 +1,13 @@
+<div class="centered-content">
+    <div class="modal-box">
+        <div class="field is-grouped">
+            <p class="control is-expanded">
+                <input #taskTitleInput class="input has-background-light is-medium" type="text" placeholder="Enter task name...">
+            </p>
+            <p class="control">
+                <a class="button is-primary is-medium has-text-white" (click)="onCreate(taskTitleInput.value)">Create</a>
+            </p>
+        </div>
+    </div>
+</div>
+

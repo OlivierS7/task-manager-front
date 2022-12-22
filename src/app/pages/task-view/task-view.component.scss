@@ -75,3 +75,16 @@
     opacity: 80%;
   }
 }
+
+.tasks-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  max-height: 535px;
+  overflow: auto;
+}
+
+.add-task-button {
+  align-self: center;
+  width: 50%;
+}
