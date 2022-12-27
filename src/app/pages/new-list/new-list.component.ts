@@ -18,7 +18,7 @@ export class NewListComponent {
 
   onCreate(title: string) {
     try {
-      this.taskService.createList(title).then((response: any) => {    
+      this.taskService.createList(title).then((response: any) => {          
         this.dialogRef.close()
         this.router.navigate(['/lists', response._id]).then(() => {
           this.toastr.success('Congratulations!', `${title} list has been created!`, {

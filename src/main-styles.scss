@@ -47,3 +47,13 @@ html, body {
     border-radius: 5px;
     padding: 35px;
 }
+
+.form-modal {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.create-modal-button {
+    margin: 0 5px;
+}
