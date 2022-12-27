@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { TaskService } from '../../services/Task/task.service';
 import { DynamicDialogRef } from '../../services/DynamicDialog/dynamic-dialog-ref';
 import { ToastrService } from 'ngx-toastr';

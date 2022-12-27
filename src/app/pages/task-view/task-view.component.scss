@@ -62,13 +62,11 @@
   margin-bottom: 8px;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
   cursor: pointer;
-  &:not(.complete) {
-    &:hover {
-      box-shadow: 0 0 0 4px #eeeeee;
+  &:hover {
+    box-shadow: 0 0 0 4px #eeeeee;
     }
-    &:active {
-      transform: scale(0.96);
-    }
+  &:active {
+    transform: scale(0.96);
   }
   &.complete {
     text-decoration: line-through;

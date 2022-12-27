@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { Task } from 'src/app/models/task.model';
 import { WebRequestService } from '../WebService/web-request.service';
 
 @Injectable({
@@ -42,11 +43,7 @@ export class TaskService {
     return result
   }
 
-  async patchTask(title: string, listId: string) {
-    let result = await this.webRequestService.post(`lists/${listId}/tasks`, {title}).toPromise()
-    this.webRequestService.get(`lists/${listId}/tasks`).subscribe((tasks) => {
-      this.getTasks$.next(tasks)
-    })
-    return result
+  async patchTask(task: Task) {
+    return await this.webRequestService.patch(`lists/${task._listId}/tasks/${task._id}`, {task})
   }
 }

@@ -1,5 +1,7 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Task } from 'src/app/models/task.model';
 import { TaskService } from 'src/app/services/Task/task.service';
 import { DynamicDialogConfig } from '../../services/DynamicDialog/dynamic-dialog.config';
 import { DynamicDialogService } from '../../services/DynamicDialog/dynamic-dialog.service';
@@ -20,7 +22,7 @@ export class TaskViewComponent implements OnInit {
   constructor(private taskService: TaskService,
     private readonly dynamicDialogService: DynamicDialogService,
     private route: ActivatedRoute,
-    private cdr: ChangeDetectorRef) {}
+    private toastr: ToastrService) {}
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {  
@@ -34,7 +36,6 @@ export class TaskViewComponent implements OnInit {
 
     this.taskService.getLists().subscribe(lists => {
       this.lists = lists
-      this.cdr.detectChanges()
     })
   }
 
@@ -49,5 +50,26 @@ export class TaskViewComponent implements OnInit {
     dialogConfig.header = NewTaskComponent.name;
     NewTaskComponent.listId = this.listId
     this.dynamicDialogService.open<string>(NewTaskComponent, dialogConfig);
+  }
+
+  onTaskClick(task: Task) {
+    task.completed = !task.completed;
+    this.taskService.patchTask(task).then((response: any) => {
+      if(task.completed) {
+        this.toastr.success(
+          'Congratulations!', `${task.title} task has completed!`, {
+            closeButton: true,
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+          })
+      } else {
+        this.toastr.warning(
+          '', `${task.title} task is not completed anymore`, {
+            closeButton: true,
+            timeOut: 2500,
+            positionClass: 'toast-top-right',
+          })
+      }
+    })
   }
 }
