@@ -1,0 +1,82 @@
+<div class="centered-content">
+  <div class="register-box">
+    <h1 class="title has-text-primary">Register Form</h1>
+    <form [formGroup]="registerForm" novalidate>
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control has-icons-left has-icons-right">
+          <input
+            type="email"
+            placeholder="email@example.com"
+            formControlName="emailCtrl"
+            [ngClass]="{
+              input: true,
+              'has-background-white': true,
+              'is-danger':
+                form['emailCtrl'].touched && form['emailCtrl'].invalid
+            }"
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+          <span
+            *ngIf="form['emailCtrl'].touched && form['emailCtrl'].invalid"
+            class="icon is-small is-right"
+          >
+            <i class="fas fa-exclamation-triangle"></i>
+          </span>
+          <p
+            *ngIf="form['emailCtrl'].touched && form['emailCtrl'].invalid && form['emailCtrl'].errors?.['email'] && form['emailCtrl'].dirty"
+            class="help is-danger"
+          >
+            Please enter a valid email address
+          </p>
+          <p
+            *ngIf="form['emailCtrl'].touched && form['emailCtrl'].invalid && form['emailCtrl'].errors?.['required'] && form['emailCtrl'].dirty"
+            class="help is-danger"
+          >
+            Please enter an email address
+          </p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Password</label>
+        <div class="control has-icons-left">
+          <input
+            class="input has-background-white"
+            formControlName="passwordCtrl"
+            type="password"
+            placeholder="Password"
+            [ngClass]="{
+                input: true,
+                'has-background-white': true,
+                'is-danger': form['passwordCtrl'].touched && form['passwordCtrl'].errors?.['required'] && form['passwordCtrl'].dirty
+              }"
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+          <p
+            *ngIf="form['passwordCtrl'].touched && form['passwordCtrl'].errors?.['required'] && form['passwordCtrl'].dirty"
+            class="help is-danger"
+          >
+            Please enter a password
+          </p>
+        </div>
+      </div>
+      <div class="field is-pulled-right">
+        <p class="control">
+          <button
+            type="submit"
+            class="button is-success"
+            [disabled]="!registerForm.valid"
+            (click)="register()"
+          >
+            Register
+          </button>
+        </p>
+      </div>
+    </form>
+  </div>
+</div>
