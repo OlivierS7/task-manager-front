@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { TaskService } from '../../services/Task/task.service';
-import { DynamicDialogRef } from '../../services/DynamicDialog/dynamic-dialog-ref';
+import { TaskService } from '../../services/TaskService/task.service';
+import { DynamicDialogRef } from '../../services/DynamicDialogService/dynamic-dialog-ref';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 

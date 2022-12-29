@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
-import { DynamicDialogModule } from './services/DynamicDialog/dynamic-dialog.module';
+import { DynamicDialogModule } from './services/DynamicDialogService/dynamic-dialog.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';

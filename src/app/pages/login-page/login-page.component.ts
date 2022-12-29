@@ -1,5 +1,7 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
+import { AuthService } from '../../services/AuthService/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -8,13 +10,13 @@ import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 })
 export class LoginPageComponent {
   loginForm!: FormGroup;
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) {
    this.createForm();
   }
 
   createForm() {
    this.loginForm = this.formBuilder.group({
-    emailCtrl: ['', [Validators.required, Validators.email]],
+    emailCtrl: ['', [Validators.required]],
     passwordCtrl: ['', [Validators.required, Validators.required]],
    });
   }
@@ -23,7 +25,7 @@ export class LoginPageComponent {
     return this.loginForm.controls
   }
 
-  login() {
-    console.log(this.loginForm.value);
+  onLoginButtonClicked(email: string, password: string) {
+    this.authService.login(email, password).subscribe((res: HttpResponse<any>) => {})
   }
 }

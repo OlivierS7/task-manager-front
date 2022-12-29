@@ -6,6 +6,7 @@
         <label class="label">Email</label>
         <div class="control has-icons-left has-icons-right">
           <input
+            #emailInput
             type="email"
             placeholder="email@example.com"
             formControlName="emailCtrl"
@@ -44,6 +45,7 @@
         <label class="label">Password</label>
         <div class="control has-icons-left">
           <input
+            #passwordInput
             class="input has-background-white"
             formControlName="passwordCtrl"
             type="password"
@@ -71,7 +73,7 @@
             type="submit"
             class="button is-success"
             [disabled]="!loginForm.valid"
-            (click)="login()"
+            (click)="onLoginButtonClicked(emailInput.value, passwordInput.value)"
           >
             Login
           </button>

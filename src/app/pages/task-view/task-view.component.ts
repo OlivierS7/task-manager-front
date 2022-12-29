@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Task } from 'src/app/models/task.model';
-import { TaskService } from 'src/app/services/Task/task.service';
-import { DynamicDialogConfig } from '../../services/DynamicDialog/dynamic-dialog.config';
-import { DynamicDialogService } from '../../services/DynamicDialog/dynamic-dialog.service';
+import { TaskService } from 'src/app/services/TaskService/task.service';
+import { DynamicDialogConfig } from '../../services/DynamicDialogService/dynamic-dialog.config';
+import { DynamicDialogService } from '../../services/DynamicDialogService/dynamic-dialog.service';
 import { NewListComponent } from '../new-list/new-list.component';
 import { NewTaskComponent } from '../new-task/new-task.component';
 
@@ -31,6 +31,8 @@ export class TaskViewComponent implements OnInit {
         this.taskService.getTasks(this.listId).subscribe((tasks) => {
           this.tasks = tasks
         })
+      } else {
+        this.tasks = undefined
       }
     })
 

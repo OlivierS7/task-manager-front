@@ -17,11 +17,14 @@
   border-radius: 8px 0 0 8px;
 }
 
-.tasks-list {
+.tasks-list, .tasks-list-container {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   border-radius: 0 8px 8px 0;
+}
+
+.tasks-list-container {
   padding: 28px;
 }
 
@@ -78,4 +81,10 @@
 .add-task-button {
   align-self: center;
   width: 50%;
+}
+
+.empty-state-text {
+  font-size: 20px;
+  color: #777777;
+  text-align: center;
 }
