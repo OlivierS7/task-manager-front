@@ -25,19 +25,18 @@ export class TaskViewComponent implements OnInit {
     private toastr: ToastrService) {}
 
   ngOnInit() {
-    this.route.params.subscribe((params: Params) => {  
-      if(!(params['listId'] == undefined)) {
-        this.listId = params['listId']
-        this.taskService.getTasks(this.listId).subscribe((tasks) => {
-          this.tasks = tasks
-        })
-      } else {
-        this.tasks = undefined
-      }
-    })
-
     this.taskService.getLists().subscribe(lists => {
       this.lists = lists
+      this.route.params.subscribe((params: Params) => {  
+        if(!(params['listId'] == undefined)) {
+          this.listId = params['listId']
+          this.taskService.getTasks(this.listId).subscribe((tasks) => {
+            this.tasks = tasks
+          })
+        } else {
+          this.tasks = undefined
+        }
+      })
     })
   }
 

@@ -2,14 +2,18 @@ import { Injectable } from '@angular/core';
 import { WebRequestService } from '../WebService/web-request.service';
 import { Router } from '@angular/router';
 import { shareReplay, tap } from 'rxjs/operators';
-import { HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private webRequestService: WebRequestService, private router: Router) { }
+  constructor(private webRequestService: WebRequestService,
+    private router: Router,
+    private toastr: ToastrService,
+    private http: HttpClient) { }
 
   login(email: string, password: string) {
     return this.webRequestService.login(email, password).pipe(
@@ -23,34 +27,61 @@ export class AuthService {
 
   logout() {
     this.removeSession()
-    console.log("logged OUT");
   }
 
-  getAccessToken() {
-    return localStorage.getItem('x-access-token');
+  redirectToLogin() {
+    this.router.navigateByUrl('/login')
+    this.toastr.error(
+      '', `Please, connect to your account!`, {
+        closeButton: true,
+        timeOut: 20000,
+        positionClass: 'toast-top-right',
+      })
+  }
+
+  getAccessToken(): string {
+    return localStorage.getItem('x-access-token') || '';
   }
 
   setAccessToken(accessToken: string) {
     return localStorage.setItem('x-access-token', accessToken);
   }
 
-  getRefreshToken() {
-    return localStorage.getItem('x-refresh-token');
+  getRefreshToken(): string {
+    return localStorage.getItem('x-refresh-token') || '';
   }
 
   setRefreshToken(refreshToken: string) {
     return localStorage.setItem('x-refresh-token', refreshToken);
   }
 
+  getUserId(): string {
+    return localStorage.getItem('user-id') || '';
+  }
+
   private setSession(userId: string, accessToken: string, refreshToken: string) {
     localStorage.setItem('user-id', userId)
-    localStorage.setItem('access-token', accessToken)
-    localStorage.setItem('refresh-token', refreshToken)
+    localStorage.setItem('x-access-token', accessToken)
+    localStorage.setItem('x-refresh-token', refreshToken)
   }
 
   private removeSession() {
     localStorage.removeItem('user-id')
-    localStorage.removeItem('access-token')
-    localStorage.removeItem('refresh-token')
+    localStorage.removeItem('x-access-token')
+    localStorage.removeItem('x-refresh-token')
+  }
+
+  getNewAccessToken() {   
+    return this.http.get(`${this.webRequestService.ROOT_URL}/users/me/access-token`, { 
+      headers: {
+      'x-refresh-token': this.getRefreshToken(),
+      '_id': this.getUserId()
+      },
+      observe: 'response'
+    }).pipe(
+      tap((res: HttpResponse<any>) => {
+        this.setAccessToken(res.headers.get('x-access-token') as string)
+      })
+    )
   }
 }
