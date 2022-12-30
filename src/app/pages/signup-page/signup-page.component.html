@@ -1,0 +1,171 @@
+<div class="centered-content">
+  <div class="signup-box">
+    <h1 class="title has-text-primary">Signup Form</h1>
+    <form [formGroup]="signupForm" novalidate>
+      <div class="field">
+        <label class="label">First Name</label>
+        <div class="control has-icons-left">
+          <input
+          #firstNameInput
+            class="input has-background-white"
+            formControlName="firstNameCtrl"
+            placeholder="John"
+            [ngClass]="{
+                input: true,
+                'has-background-white': true,
+                'is-danger': form['passwordCtrl'].touched && form['passwordCtrl'].errors?.['required'] && form['passwordCtrl'].dirty
+              }"
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+          <p
+            *ngIf="form['passwordCtrl'].touched && form['passwordCtrl'].errors?.['required'] && form['passwordCtrl'].dirty"
+            class="help is-danger"
+          >
+            Please enter your first name
+          </p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Last Name</label>
+        <div class="control has-icons-left">
+          <input
+          #lastNameInput
+            class="input has-background-white"
+            formControlName="lastNameCtrl"
+            placeholder="Doe"
+            [ngClass]="{
+                input: true,
+                'has-background-white': true,
+                'is-danger': form['passwordCtrl'].touched && form['passwordCtrl'].errors?.['required'] && form['passwordCtrl'].dirty
+              }"
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+          <p
+            *ngIf="form['passwordCtrl'].touched && form['passwordCtrl'].errors?.['required'] && form['passwordCtrl'].dirty"
+            class="help is-danger"
+          >
+            Please enter your last name
+          </p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control has-icons-left has-icons-right">
+          <input
+          #emailInput
+            type="email"
+            placeholder="email@example.com"
+            formControlName="emailCtrl"
+            [ngClass]="{
+              input: true,
+              'has-background-white': true,
+              'is-danger':
+                form['emailCtrl'].touched && form['emailCtrl'].invalid
+            }"
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+          <span
+            *ngIf="form['emailCtrl'].touched && form['emailCtrl'].invalid"
+            class="icon is-small is-right"
+          >
+            <i class="fas fa-exclamation-triangle"></i>
+          </span>
+          <p
+            *ngIf="form['emailCtrl'].touched && form['emailCtrl'].invalid && form['emailCtrl'].errors?.['email'] && form['emailCtrl'].dirty"
+            class="help is-danger"
+          >
+            Please enter a valid email address
+          </p>
+          <p
+            *ngIf="form['emailCtrl'].touched && form['emailCtrl'].invalid && form['emailCtrl'].errors?.['required'] && form['emailCtrl'].dirty"
+            class="help is-danger"
+          >
+            Please enter an email address
+          </p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Password</label>
+        <div class="control has-icons-left">
+          <input
+          #passwordInput
+            class="input has-background-white"
+            formControlName="passwordCtrl"
+            type="password"
+            placeholder="Password"
+            [ngClass]="{
+                input: true,
+                'has-background-white': true,
+                'is-danger': form['passwordCtrl'].touched && form['passwordCtrl'].errors?.['required'] && form['passwordCtrl'].dirty
+              }"
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+          <p
+            *ngIf="form['passwordCtrl'].touched && form['passwordCtrl'].errors?.['required'] && form['passwordCtrl'].dirty"
+            class="help is-danger"
+          >
+            Please enter a password
+          </p>
+          <p
+            *ngIf="form['passwordCtrl'].touched && form['passwordCtrl'].errors?.['pattern'] && form['passwordCtrl'].dirty"
+            class="help is-danger"
+          >
+            Password must contain 8 characters and at least one uppercase letter, one lowercase letter and one number
+          </p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Confirm password</label>
+        <div class="control has-icons-left">
+          <input
+            #passwordVerificationInput
+            class="input has-background-white"
+            formControlName="passwordVerificationCtrl"
+            type="password"
+            placeholder="Password"
+            [ngClass]="{
+                input: true,
+                'has-background-white': true,
+                'is-danger': form['passwordCtrl'].touched && form['passwordCtrl'].errors?.['required'] && form['passwordCtrl'].dirty
+              }"
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+          <p
+            *ngIf="passwordInput.value !== passwordVerificationInput.value"
+            class="help is-danger"
+          >
+            Passwords must be the same
+          </p>
+        </div>
+      </div>
+
+      <div class="field is-pulled-right">
+        <p class="control">
+          <button
+            type="submit"
+            class="button is-success"
+            [disabled]="!signupForm.valid"
+            (click)="onSignupButtonClicked(firstNameInput.value, lastNameInput.value, emailInput.value, passwordInput.value)"
+          >
+            Sign Up
+          </button>
+        </p>
+      </div>
+
+    </form>
+  </div>
+</div>
