@@ -16,8 +16,8 @@ export class LoginPageComponent {
 
   createForm() {
    this.loginForm = this.formBuilder.group({
-    emailCtrl: ['', [Validators.required]],
-    passwordCtrl: ['', [Validators.required, Validators.required]],
+    emailCtrl: [''],
+    passwordCtrl: ['', [Validators.required]],
    });
   }
 
