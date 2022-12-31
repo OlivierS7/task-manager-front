@@ -1,6 +1,8 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/AuthService/auth.service';
 
 @Component({
@@ -11,7 +13,9 @@ import { AuthService } from 'src/app/services/AuthService/auth.service';
 export class SignupPageComponent {
   signupForm!: FormGroup;
   constructor(private formBuilder: FormBuilder,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private router: Router,
+    private toastr: ToastrService) {
    this.createForm();
   }
 
@@ -30,6 +34,15 @@ export class SignupPageComponent {
   }
 
   onSignupButtonClicked(firstName: string, lastName: string, email: string, password: string) {
-    this.authService.signup(firstName, lastName, email, password).subscribe((res: HttpResponse<any>) => {})
+    this.authService.signup(firstName, lastName, email, password).subscribe((res: HttpResponse<any>) => {
+      this.router.navigate(['/lists']).then(() => {
+        this.toastr.success(
+          'Welcome!', `Account succesfully created!`, {
+            closeButton: true,
+            timeOut: 10000,
+            positionClass: 'toast-top-right',
+        })
+      })
+    })
   }
 }

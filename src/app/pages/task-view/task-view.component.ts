@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Task } from 'src/app/models/task.model';
 import { TaskService } from 'src/app/services/TaskService/task.service';
@@ -7,6 +7,7 @@ import { DynamicDialogConfig } from '../../services/DynamicDialogService/dynamic
 import { DynamicDialogService } from '../../services/DynamicDialogService/dynamic-dialog.service';
 import { NewListComponent } from '../new-list/new-list.component';
 import { NewTaskComponent } from '../new-task/new-task.component';
+import { UpdateListComponent } from '../update-list/update-list.component';
 
 @Component({
   selector: 'app-task-view',
@@ -22,7 +23,8 @@ export class TaskViewComponent implements OnInit {
   constructor(private taskService: TaskService,
     private readonly dynamicDialogService: DynamicDialogService,
     private route: ActivatedRoute,
-    private toastr: ToastrService) {}
+    private toastr: ToastrService,
+    private router: Router) {}
 
   ngOnInit() {
     this.taskService.getLists().subscribe(lists => {
@@ -40,13 +42,20 @@ export class TaskViewComponent implements OnInit {
     })
   }
 
-  showOverlayList() {
+  showOverlayCreateList() {
     const dialogConfig = new DynamicDialogConfig("Create a new List");
     dialogConfig.header = NewListComponent.name;
     this.dynamicDialogService.open<string>(NewListComponent, dialogConfig);
   }
 
-  showOverlayTask() {
+  showOverlayModifyList() {
+    const dialogConfig = new DynamicDialogConfig("Update the List");
+    dialogConfig.header = UpdateListComponent.name;
+    UpdateListComponent.listId = this.listId
+    this.dynamicDialogService.open<string>(UpdateListComponent, dialogConfig);
+  }
+
+  showOverlayCreateTask() {
     const dialogConfig = new DynamicDialogConfig("Create a new Task");
     dialogConfig.header = NewTaskComponent.name;
     NewTaskComponent.listId = this.listId
@@ -71,6 +80,19 @@ export class TaskViewComponent implements OnInit {
             positionClass: 'toast-top-right',
           })
       }
+    })
+  }
+
+  onDeleteListClick() {
+    this.taskService.deleteList(this.listId).subscribe(() => {
+      this.router.navigate(['/lists']).then(() => {
+        this.toastr.success(
+          '', `List has been deleted!`, {
+            closeButton: true,
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+        })
+      })
     })
   }
 }

@@ -21,11 +21,24 @@ export class TaskService {
     return result
   }
 
+  async updateList(title: string, listId: string) {
+    this.webRequestService.patch(`lists/${listId}`, {title}).subscribe(result => {
+      this.webRequestService.get('lists').subscribe((lists) => {
+        this.getLists$.next(lists)
+      })
+      return result
+    })
+  }
+
   getLists() {
     this.webRequestService.get('lists').subscribe((lists) => {
       this.getLists$.next(lists)
     })
     return this.getLists$
+  }
+
+  deleteList(listId: string) {
+    return this.webRequestService.delete(`lists/${listId}`);
   }
 
   getTasks(listId: string) {

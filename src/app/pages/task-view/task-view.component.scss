@@ -26,6 +26,9 @@
 
 .tasks-list-container {
   padding: 28px;
+  .task-title {
+    margin-bottom: 0;
+  }
 }
 
 .list-menu {
@@ -83,8 +86,38 @@
   width: 50%;
 }
 
-.empty-state-text {
-  font-size: 20px;
-  color: #777777;
-  text-align: center;
+.no-list-selected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  .empty-state-text {
+    font-size: 24px;
+    color: #777777;
+    text-align: center;
+  }
+}
+
+
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+  .title {
+    flex-grow: 1;
+  }
+  .dropdown-menu {
+    min-width: auto;
+    .dropdown-item {
+      padding-right: 0;
+      text-align: right;
+      span {
+        font-weight: bold;
+      }
+      .icon {
+        margin: 0 8px
+      }
+    }
+  }
 }
