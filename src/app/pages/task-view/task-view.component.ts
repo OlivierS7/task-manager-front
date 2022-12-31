@@ -7,7 +7,7 @@ import { DynamicDialogConfig } from '../../services/DynamicDialogService/dynamic
 import { DynamicDialogService } from '../../services/DynamicDialogService/dynamic-dialog.service';
 import { NewListComponent } from '../new-list/new-list.component';
 import { NewTaskComponent } from '../new-task/new-task.component';
-import { UpdateListComponent } from '../update-list/update-list.component';
+import { UpdateListComponent } from '../modify-list/update-list.component';
 import { UpdateTaskComponent } from '../update-task/update-task.component';
 
 @Component({
@@ -68,7 +68,7 @@ export class TaskViewComponent implements OnInit {
     dialogConfig.header = UpdateTaskComponent.name;
     UpdateTaskComponent.listId = this.listId
     task.completed = !task.completed;
-    this.taskService.patchTask(task).then((response: any) => {})
+    // this.taskService.patchTask(task).then((response: any) => {})
     UpdateTaskComponent.task = task
     this.dynamicDialogService.open<string>(UpdateTaskComponent, dialogConfig);
   }

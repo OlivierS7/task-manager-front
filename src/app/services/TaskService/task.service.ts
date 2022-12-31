@@ -61,6 +61,5 @@ export class TaskService {
   }
 
   async patchTask(task: Task) {
-    return await this.webRequestService.patch(`lists/${task._listId}/tasks/${task._id}`, {task})
-  }
+  return await this.webRequestService.patch(`lists/${task._listId}/tasks/${task._id}`, task).subscribe(() => {})}
 }

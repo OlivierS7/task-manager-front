@@ -20,10 +20,10 @@ export class UpdateTaskComponent {
 
   onUpdate(title: string) {
     try {
-      UpdateTaskComponent.task.title = title
-      this.taskService.patchTask(UpdateTaskComponent.task).then(() => {                
+      UpdateTaskComponent.task.title = title 
+      this.taskService.patchTask(UpdateTaskComponent.task).then(() => {      
         this.dialogRef.close()
-        this.toastr.success('Congratulations!', `${title} task has been updated!`, {
+        this.toastr.success('', `${title} task has been updated!`, {
           closeButton: true,
           timeOut: 10000,
           progressBar: true,
