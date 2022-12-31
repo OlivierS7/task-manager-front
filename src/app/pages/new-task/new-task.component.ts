@@ -24,7 +24,7 @@ export class NewTaskComponent {
           this.dialogRef.close();
           this.router.navigate(['/lists', NewTaskComponent.listId]).then(() => {
             this.toastr.success(
-              'Congratulations!', `${title} task has been created!`, {
+              '', `${title} task has been created!`, {
                 closeButton: true,
                 timeOut: 10000,
                 progressBar: true,
