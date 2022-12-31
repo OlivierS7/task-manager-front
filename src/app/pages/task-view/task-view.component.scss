@@ -55,21 +55,36 @@
 }
 
 .task {
+  display: flex;
+  align-items: center;
   background: #ffffff;
   padding: 10px 15px;
   border-radius: 8px;
   margin-bottom: 8px;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
   cursor: pointer;
+  .task-text {
+    display: flex;
+    flex-grow: 1;
+  }
   &:hover {
     box-shadow: 0 0 0 4px #eeeeee;
+    .task-buttons {
+      opacity: 1;
+      transform: scale(1);
     }
+  }
   &:active {
     transform: scale(0.96);
   }
-  &.complete {
+  &.complete .task-text {
     text-decoration: line-through;
     opacity: 80%;
+  }
+  .task-buttons {
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.4s ease;
+    transform: scale(0.8);
   }
 }
 
@@ -79,6 +94,9 @@
   flex-grow: 1;
   max-height: 535px;
   overflow: auto;
+  .edit-task {
+    margin-right: 10px;
+  }
 }
 
 .add-task-button {

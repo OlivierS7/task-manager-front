@@ -35,8 +35,6 @@ export class AuthService {
       tap((res: HttpResponse<any>) => {
         // Auth tokens will be in the header of this response
         this.setSession(res.body._id, res.headers.get('x-access-token') as string, res.headers.get('x-refresh-token') as string)
-        console.log("signed up");
-        
       })
     )
   }

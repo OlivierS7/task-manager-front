@@ -28,16 +28,16 @@
                         </div>
                         <div class="dropdown-menu" role="menu">
                           <div class="dropdown-content">
-                            <a class="dropdown-item" (click)="showOverlayModifyList()">
-                              <span>Modify</span>
-                              <span class="icon is-small">
-                                <i class="fas fa-pencil" aria-hidden="true"></i>
+                            <a class="dropdown-item" (click)="showOverlayUpdateList()">
+                              <span>Update</span>
+                              <span class="icon">
+                                <i class="fas fa-edit" aria-hidden="true"></i>
                               </span>
                             </a>
                             <hr class="dropdown-divider">
                             <a class="dropdown-item has-text-danger" (click)="onDeleteListClick()">
                                 <span>Delete</span>
-                                <span class="icon is-small">
+                                <span class="icon">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </span>
                               </a>
@@ -47,7 +47,21 @@
                 </div>
                 <div class="tasks-container">
                     <div class="task" *ngFor="let task of tasks" (click)="onTaskClick(task)" [ngClass]="{'complete': task.completed}">
-                        <p>{{task.title}}</p>
+                        <div class="task-text">
+                            <p>{{task.title}}</p>
+                        </div>
+                        <div class="task-buttons">
+                            <button class="button edit-task" (click)="showOverlayUpdateTask(task)">
+                                <span class="icon">
+                                    <i class="fas fa-edit" aria-hidden="true"></i>
+                                </span>
+                            </button>
+                            <button class="button is-danger" (click)="onDeleteTaskClick(task._id)">
+                                <span class="icon">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </span>
+                            </button>
+                        </div>
                     </div>
                     <h3 class="empty-state-text" *ngIf="tasks.length === 0">There are no tasks here! Add a new task using the button below</h3>
                 </div>

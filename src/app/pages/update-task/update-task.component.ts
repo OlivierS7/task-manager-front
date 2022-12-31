@@ -1,26 +1,29 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { Task } from 'src/app/models/task.model';
 import { DynamicDialogRef } from 'src/app/services/DynamicDialogService/dynamic-dialog-ref';
 import { TaskService } from 'src/app/services/TaskService/task.service';
 
 @Component({
-  selector: 'app-update-list',
-  templateUrl: './update-list.component.html',
-  styleUrls: ['./update-list.component.scss']
+  selector: 'app-update-task',
+  templateUrl: './update-task.component.html',
+  styleUrls: ['./update-task.component.scss']
 })
-export class UpdateListComponent {
+export class UpdateTaskComponent {
   constructor(
     private taskService: TaskService, 
     private readonly dialogRef: DynamicDialogRef,
-    private toastr: ToastrService) {}
+    private toastr: ToastrService,) {}
 
     static listId: string;
+    static task: Task;
 
   onUpdate(title: string) {
     try {
-      this.taskService.updateList(title, UpdateListComponent.listId).then(() => {                
+      UpdateTaskComponent.task.title = title
+      this.taskService.patchTask(UpdateTaskComponent.task).then(() => {                
         this.dialogRef.close()
-        this.toastr.success('Congratulations!', `${title} list has been updated!`, {
+        this.toastr.success('Congratulations!', `${title} task has been updated!`, {
           closeButton: true,
           timeOut: 10000,
           progressBar: true,
@@ -36,4 +39,5 @@ export class UpdateListComponent {
       })
     }
   }
+
 }

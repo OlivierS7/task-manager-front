@@ -8,6 +8,7 @@ import { DynamicDialogService } from '../../services/DynamicDialogService/dynami
 import { NewListComponent } from '../new-list/new-list.component';
 import { NewTaskComponent } from '../new-task/new-task.component';
 import { UpdateListComponent } from '../update-list/update-list.component';
+import { UpdateTaskComponent } from '../update-task/update-task.component';
 
 @Component({
   selector: 'app-task-view',
@@ -48,7 +49,7 @@ export class TaskViewComponent implements OnInit {
     this.dynamicDialogService.open<string>(NewListComponent, dialogConfig);
   }
 
-  showOverlayModifyList() {
+  showOverlayUpdateList() {
     const dialogConfig = new DynamicDialogConfig("Update the List");
     dialogConfig.header = UpdateListComponent.name;
     UpdateListComponent.listId = this.listId
@@ -62,24 +63,34 @@ export class TaskViewComponent implements OnInit {
     this.dynamicDialogService.open<string>(NewTaskComponent, dialogConfig);
   }
 
+  showOverlayUpdateTask(task: Task) {
+    const dialogConfig = new DynamicDialogConfig("Update the Task");
+    dialogConfig.header = UpdateTaskComponent.name;
+    UpdateTaskComponent.listId = this.listId
+    task.completed = !task.completed;
+    this.taskService.patchTask(task).then((response: any) => {})
+    UpdateTaskComponent.task = task
+    this.dynamicDialogService.open<string>(UpdateTaskComponent, dialogConfig);
+  }
+
   onTaskClick(task: Task) {
     task.completed = !task.completed;
     this.taskService.patchTask(task).then((response: any) => {
-      if(task.completed) {
-        this.toastr.success(
-          'Congratulations!', `${task.title} task has completed!`, {
-            closeButton: true,
-            timeOut: 3000,
-            positionClass: 'toast-top-right',
-          })
-      } else {
-        this.toastr.warning(
-          '', `${task.title} task is not completed anymore`, {
-            closeButton: true,
-            timeOut: 2500,
-            positionClass: 'toast-top-right',
-          })
-      }
+      // if(task.completed) {
+      //   this.toastr.success(
+      //     'Congratulations!', `${task.title} task has completed!`, {
+      //       closeButton: true,
+      //       timeOut: 3000,
+      //       positionClass: 'toast-top-right',
+      //     })
+      // } else {
+      //   this.toastr.warning(
+      //     '', `${task.title} task is not completed anymore`, {
+      //       closeButton: true,
+      //       timeOut: 2500,
+      //       positionClass: 'toast-top-right',
+      //     })
+      // }
     })
   }
 
@@ -93,6 +104,18 @@ export class TaskViewComponent implements OnInit {
             positionClass: 'toast-top-right',
         })
       })
+    })
+  }
+
+  onDeleteTaskClick(taskId: string) {
+    this.taskService.deleteTask(this.listId, taskId).subscribe(() => {
+      this.tasks = this.tasks.filter((task: { _id: string }) => task._id !== taskId)
+      this.toastr.success(
+        '', `Task has been deleted!`, {
+          closeButton: true,
+          timeOut: 3000,
+          positionClass: 'toast-top-right',
+        })
     })
   }
 }

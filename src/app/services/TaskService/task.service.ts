@@ -48,6 +48,10 @@ export class TaskService {
     return this.getTasks$
   }
 
+  deleteTask(listId: string, taskId: string) {
+    return this.webRequestService.delete(`lists/${listId}/tasks/${taskId}`)
+  }
+
   async createTask(title: string, listId: string) {
     let result = await this.webRequestService.post(`lists/${listId}/tasks`, {title}).toPromise()
     this.webRequestService.get(`lists/${listId}/tasks`).subscribe((tasks) => {
