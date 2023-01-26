@@ -18,7 +18,7 @@ import { UpdateTaskComponent } from '../update-task/update-task.component';
 export class TaskViewComponent implements OnInit {
 
   lists: any
-  tasks: any
+  tasks: any = []
   listId!: string
 
   constructor(private taskService: TaskService,
