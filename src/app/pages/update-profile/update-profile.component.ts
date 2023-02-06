@@ -15,7 +15,8 @@ export class UpdateProfileComponent {
   constructor(
     private authService: AuthService, 
     private readonly dialogRef: DynamicDialogRef,
-    private toastr: ToastrService) {}
+    private toastr: ToastrService) {
+    }
 
   async onUpdate(firstName: string, lastName: string, email: string) {
     try {
