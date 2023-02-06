@@ -7,8 +7,9 @@ import { DynamicDialogConfig } from '../../services/DynamicDialogService/dynamic
 import { DynamicDialogService } from '../../services/DynamicDialogService/dynamic-dialog.service';
 import { NewListComponent } from '../new-list/new-list.component';
 import { NewTaskComponent } from '../new-task/new-task.component';
-import { UpdateListComponent } from '../modify-list/update-list.component';
+import { UpdateListComponent } from '../update-list/update-list.component';
 import { UpdateTaskComponent } from '../update-task/update-task.component';
+import { UpdateProfileComponent } from '../update-profile/update-profile.component';
 
 @Component({
   selector: 'app-task-view',
@@ -61,6 +62,12 @@ export class TaskViewComponent implements OnInit {
     dialogConfig.header = NewTaskComponent.name;
     NewTaskComponent.listId = this.listId
     this.dynamicDialogService.open<string>(NewTaskComponent, dialogConfig);
+  }
+
+  showOverlayUpdateProfile() {
+    const dialogConfig = new DynamicDialogConfig("Update your profile");
+    dialogConfig.header = UpdateProfileComponent.name;
+    this.dynamicDialogService.open<string>(UpdateProfileComponent, dialogConfig);
   }
 
   showOverlayUpdateTask(task: Task) {

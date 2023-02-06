@@ -39,6 +39,10 @@ export class AuthService {
     )
   }
 
+  async patchUser(firstName: string, lastName: string, email: string) {
+    return await this.webRequestService.patch(`users`, {firstName, lastName, email})
+  }
+
   redirectToLogin() {
     this.router.navigateByUrl('/login')
     this.toastr.error(
