@@ -1,0 +1,25 @@
+<div class="centered-content">
+    <div class="modal-box">
+        <form class="form-modal" onsubmit="return false">
+            <div class="field is-grouped update-profile-form">
+                <p class="control is-expanded">
+                    <input #userFirstName class="input has-background-light is-medium" type="text" placeholder="Enter your first name...">
+                </p>
+                <p class="control is-expanded">
+                    <input #userLastName class="input has-background-light is-medium" type="text" placeholder="Enter your last name...">
+                </p>
+                <p class="control is-expanded">
+                    <input #userEmail class="input has-background-light is-medium" type="text" placeholder="Enter your email address...">
+                </p>
+                <p class="control">
+                    <button class="button is-primary is-medium has-text-white modal-button" (click)="onUpdate(userFirstName.value, userLastName.value, userEmail.value)">Save</button>
+                </p>
+            </div>
+        </form>
+        <div *ngIf="errorMessage">
+            <p *ngFor="let error of errorMessage">
+                {{ error }}
+            </p>
+        </div>
+    </div>
+</div>
