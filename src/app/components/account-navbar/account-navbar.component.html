@@ -1,0 +1,15 @@
+<div class="sidebar">
+    <h1 class="title has-text-primary">Account</h1>
+    <div class="nav-menu">
+        <ul>
+            <li class="nav-items" [routerLink]="[link.link]" *ngFor="let link of links" routerLinkActive="is-active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-links">
+                    <span class="mr-2">
+                        <i class="fa-fw {{link.iconClass}}"></i>
+                    </span>
+                    <span>{{link.title}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

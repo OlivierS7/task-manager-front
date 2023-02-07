@@ -1,0 +1,28 @@
+<div class="centered-content">
+    <form class="form-modal w-100" onsubmit="return false">
+        <div class="field is-grouped update-profile-form">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/500_Startups_-_logo.png/280px-500_Startups_-_logo.png" alt="" class="br-50 m-4" width="128" height="128">
+            <div class="update-profile-row">
+                <p class="control mr-4">
+                    First Name
+                    <input #userFirstName class="input has-background-light is-medium" type="text" placeholder="Enter your first name..." value="{{user.firstName}}">
+                </p>
+                <p class="control ml-4">
+                    Last Name
+                    <input #userLastName class="input has-background-light is-medium" type="text" placeholder="Enter your last name..." value="{{user.lastName}}">
+                </p>
+            </div>
+            <p class="control">
+                Email Adress
+                <input #userEmail class="input has-background-light is-medium" type="text" placeholder="Enter your email address..." value="{{user.email}}">
+            </p>
+            <div *ngIf="errorMessage">
+                <span *ngFor="let error of errorMessage" class="has-text-danger">{{ error }}. </span>
+            </div>
+            <p class="control">
+                <button class="button is-primary is-medium has-text-white modal-button" (click)="onUpdate(userFirstName.value, userLastName.value, userEmail.value)">Save</button>
+            </p>
+        </div>
+    </form>
+   
+</div>

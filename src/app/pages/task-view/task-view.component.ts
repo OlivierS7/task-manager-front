@@ -9,7 +9,7 @@ import { NewListComponent } from '../new-list/new-list.component';
 import { NewTaskComponent } from '../new-task/new-task.component';
 import { UpdateListComponent } from '../update-list/update-list.component';
 import { UpdateTaskComponent } from '../update-task/update-task.component';
-import { UpdateProfileComponent } from '../update-profile/update-profile.component';
+import { UpdateProfileComponent } from '../../components/update-profile/update-profile.component';
 
 @Component({
   selector: 'app-task-view',

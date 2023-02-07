@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { catchError, map, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,10 @@ export class WebRequestService {
 
   login(email: string, password: string) {
     return this.http.post(`${this.ROOT_URL}/users/login`, { email, password }, { observe: 'response' })
+  }
+
+  verifyLogin(email: string, password: string) {
+    return this.http.post(`${this.ROOT_URL}/users/verify-login`, { email, password }, { observe: 'response' })
   }
 
   signup(firstName: string, lastName: string, email: string, password: string) {

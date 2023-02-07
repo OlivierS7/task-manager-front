@@ -68,3 +68,109 @@ html, body {
 .w-100 {
     width: 100%;
 }
+
+
+
+.navbar-section {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    button {
+        color: #4a4a4a;
+    }
+    .navbar-active {
+        border: 1.5px solid #000000;
+        color: #000000;
+    }
+}
+
+  
+.bd-tl-tr {
+    border-radius: 8px 8px 0 0;
+}
+
+.br-50 {
+    border-radius: 50%;
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    flex-grow: 1;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    background: #ffffff;
+    padding: 28px;
+    border-radius: 8px 0 0 8px;
+    height: 100%;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    border-radius: 0 0 8px 0;
+}
+
+
+.nav-links {
+    color: #4a4a4a;
+}
+
+.nav-items {
+    border-radius: 4px;
+    padding: 4px 6px 4px 10px;
+}
+
+.is-active::before {
+    content: "";
+    width: 4px;
+    height: 32px;
+    border-radius: 4px 0 0 4px;
+    background-color: $green;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.nav-items.is-active {
+    background-color: #cfcfcf59;
+    position: relative;
+}
+
+.is-active {
+    color: #0c0c0c;
+}
+
+
+.account-view, .account-manager {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    max-width: 1000px;
+    max-height: 680px;
+}
+
+.account-view {
+    flex-direction: column;
+}
+
+.account-manager {
+    flex-direction: row;
+}
+
+.update-profile-form {
+    display: flex;
+    flex-direction: column;
+    .control {
+        margin: 6px 0;
+    }
+    .errors {
+        text-align: center;
+    }
+}

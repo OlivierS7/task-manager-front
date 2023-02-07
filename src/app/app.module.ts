@@ -16,7 +16,12 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { WebRequestInterceptor } from './services/WebRequestInterceptorService/web-request-interceptor';
 import { UpdateListComponent } from './pages/update-list/update-list.component';
 import { UpdateTaskComponent } from './pages/update-task/update-task.component';
-import { UpdateProfileComponent } from './pages/update-profile/update-profile.component';
+import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
+import { AccountComponent } from './pages/account/account.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { AccountAdminComponent } from './pages/account-admin/account-admin.component';
+import { AccountNavbarComponent } from './components/account-navbar/account-navbar.component';
+import { UpdateAccountComponent } from './components/update-account/update-account.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,12 @@ import { UpdateProfileComponent } from './pages/update-profile/update-profile.co
     SignupPageComponent,
     UpdateListComponent,
     UpdateTaskComponent,
-    UpdateProfileComponent
+    UpdateProfileComponent,
+    AccountComponent,
+    NavbarComponent,
+    AccountAdminComponent,
+    AccountNavbarComponent,
+    UpdateAccountComponent
   ],
   imports: [
     BrowserModule,

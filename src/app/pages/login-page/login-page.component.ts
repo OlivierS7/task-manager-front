@@ -32,6 +32,8 @@ export class LoginPageComponent {
 
   onLoginButtonClicked(email: string, password: string) {
     this.authService.login(email, password).subscribe((res: HttpResponse<any>) => {
+      console.log(res);
+      
       this.router.navigate(['/lists']).then(() => {
         this.toastr.success(
           '', `Connected!`, {

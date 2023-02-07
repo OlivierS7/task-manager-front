@@ -1,30 +1,19 @@
 @import "../../../main-styles.scss";
 
-.task-manager {
+.task-manager, .task-manager-view {
   display: flex;
-  flex-direction: row;
   width: 100%;
   height: 100%;
   max-width: 1000px;
   max-height: 680px;
+}
+
+.task-manager {
+  flex-direction: row;
 }
 
 .task-manager-view {
-  display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
-  max-width: 1000px;
-  max-height: 680px;
-}
-
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  width: 250px;
-  background: #ffffff;
-  padding: 28px;
-  border-radius: 8px 0 0 8px;
 }
 
 .tasks-list, .tasks-list-container {
@@ -146,14 +135,4 @@
       }
     }
   }
-}
-
-.user-section {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.bd-tl-tr {
-  border-radius: 8px 8px 0 0;
 }
